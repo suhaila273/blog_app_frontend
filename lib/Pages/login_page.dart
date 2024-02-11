@@ -1,4 +1,5 @@
 import 'package:blog_app/Pages/register_page.dart';
+import 'package:blog_app/Pages/view_page.dart';
 import 'package:blog_app/Services/userService.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     if(response["status"]=="success")
     {
       print("successfully login");
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewPage()));
     }
     else if(response["status"]=="invalid email id")
     {
