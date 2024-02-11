@@ -1,4 +1,5 @@
 import 'package:blog_app/Models/postModel.dart';
+import 'package:blog_app/Pages/add_page.dart';
 import 'package:blog_app/Services/postService.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class _ViewPageState extends State<ViewPage> {
           title: Text("Time line",style: TextStyle(color: Colors.white),),
           actions: [
             IconButton(onPressed: (){
-
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>AddPage()));
             }, icon: Icon(Icons.add,color: Colors.white,size: 27,)),
             SizedBox(width: 25,)
           ],
@@ -51,7 +52,8 @@ class _ViewPageState extends State<ViewPage> {
                               ),
                               title: Text(snapshot.data![index].userId.name),
                              subtitle: Text(snapshot.data![index].userId.address+ "\n"
-                                  + snapshot.data![index].userId.mobile
+                                  + snapshot.data![index].userId.mobile+
+                                 "\n"+snapshot.data![index].postedDate.toIso8601String()
                               ),
                             ),
                             SizedBox(height: 10,),
