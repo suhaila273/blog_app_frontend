@@ -1,3 +1,4 @@
+import 'package:blog_app/Pages/register_page.dart';
 import 'package:blog_app/Services/userService.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                             )
                         ),
                         onPressed: (){
-                         // Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
                         }, child:Text("Sign Up",style: TextStyle(fontWeight: FontWeight.bold),)),
                   ),
                 ],
