@@ -1,7 +1,9 @@
+import 'package:blog_app/Pages/post_menu.dart';
 import 'package:blog_app/Pages/register_page.dart';
 import 'package:blog_app/Pages/view_page.dart';
 import 'package:blog_app/Services/userService.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,8 +21,12 @@ class _LoginPageState extends State<LoginPage> {
     final response = await BlogApiService().loginData(email1.text, pass1.text);
     if(response["status"]=="success")
     {
+      String userId=response["userdata"]["_id"].toString();
+      SharedPreferences.setMockInitialValues({});
+      SharedPreferences preferences=await SharedPreferences.getInstance();
+      preferences.setString("userId", userId);
       print("successfully login");
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewPage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>PostMenu()));
     }
     else if(response["status"]=="invalid email id")
     {
@@ -69,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder()
                 ),
               ),
-              SizedBox(height: 25,),
+              SizedBox(height: 55,),
               SizedBox(
                 height: 45,
                 width: 250,
@@ -83,10 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     onPressed:SendValuesToApi, child:Text("Log In")),
               ),
-              SizedBox(height: 45,),
+              SizedBox(height: 65,),
               Row(
                 children: [
-                  SizedBox(width: 25,),
+                  SizedBox(width: 10,),
                   Text("Don't have an account?",style: TextStyle(color: Colors.black,fontSize: 16),),
                   SizedBox(width: 10,),
                   SizedBox(

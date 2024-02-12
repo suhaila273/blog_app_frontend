@@ -1,5 +1,7 @@
+import 'package:blog_app/Pages/view_page.dart';
 import 'package:blog_app/Services/postService.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -10,12 +12,13 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   TextEditingController post1=new TextEditingController();
-  TextEditingController id1=new TextEditingController();
-  @override
 
   void SendValuesToApiPost() async {
+    SharedPreferences prefer=await SharedPreferences.getInstance();
+    String userId=prefer.getString("userId")?? "";
+    print("post is : "+post1.text);
 
-    final response = await PostApiService().sendData(id1.text,post1.text);
+    final response = await PostApiService().sendData(userId, post1.text);
     if(response["status"]=="success")
     {
       print("successfully posted");
@@ -32,7 +35,9 @@ class _AddPageState extends State<AddPage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: (){Navigator.pop(context);},
+          leading: IconButton(onPressed: (){
+            Navigator.pop(context);
+            },
               icon: Icon(Icons.arrow_back_ios_new,color: Colors.white,)),
           title: Text("My page",style: TextStyle(color: Colors.white),),
           backgroundColor: Color(0xFFE1306C),
@@ -43,15 +48,6 @@ class _AddPageState extends State<AddPage> {
             width: double.infinity,
             child: Column(
               children: [
-                SizedBox(height: 20,),
-                TextField(
-                  controller: id1,
-                  decoration: InputDecoration(
-                      labelText: "User id",
-                      hintText: "Enter here!",
-                      border: OutlineInputBorder()
-                  ),
-                ),
                 SizedBox(height: 20,),
                 TextField(
                   controller: post1,
