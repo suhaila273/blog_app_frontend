@@ -1,4 +1,5 @@
 import 'package:blog_app/Models/postModel.dart';
+import 'package:blog_app/Pages/add_page.dart';
 import 'package:blog_app/Services/postService.dart';
 import 'package:flutter/material.dart';
 
@@ -25,12 +26,6 @@ class _ViewPageState extends State<ViewPage> {
           leading: IconButton(onPressed: (){Navigator.pop(context);},
               icon: Icon(Icons.arrow_back_ios_new,color: Colors.white,)),
           title: Text("Time line",style: TextStyle(color: Colors.white),),
-          actions: [
-            IconButton(onPressed: (){
-
-            }, icon: Icon(Icons.add,color: Colors.white,size: 27,)),
-            SizedBox(width: 25,)
-          ],
           backgroundColor: Color(0xFFE1306C),
         ),
         body: FutureBuilder(
@@ -47,15 +42,23 @@ class _ViewPageState extends State<ViewPage> {
                           children: [
                             ListTile(
                               leading: CircleAvatar(
-                                child: Text(snapshot.data![index].userId.name[0]),
+                                radius: 35,
+                                child: Text(snapshot.data![index].userId.name[0],style: TextStyle(fontSize: 24),),
+                                backgroundColor: Colors.white,
                               ),
                               title: Text(snapshot.data![index].userId.name),
                              subtitle: Text(snapshot.data![index].userId.address+ "\n"
-                                  + snapshot.data![index].userId.mobile
+                                  + snapshot.data![index].userId.mobile+
+                                 "\n"+snapshot.data![index].postedDate.toIso8601String()
                               ),
                             ),
-                            SizedBox(height: 10,),
-                            Text(snapshot.data![index].post,style: TextStyle(fontSize: 20),),
+                            Row(
+                              children: [
+                                SizedBox(height: 15,),
+                                SizedBox(width: 20,),
+                                Text(snapshot.data![index].post,style: TextStyle(fontSize: 20,),),
+                              ],
+                            ),
                             //Image.network(snapshot.data![index].post),
                             SizedBox(height: 10,),
                           ],
