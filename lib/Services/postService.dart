@@ -10,7 +10,7 @@ class PostApiService
  Future<dynamic> sendData(String userId,String post) async
   {
     var client =http.Client();
-    var apiUrl= Uri.parse("http://192.168.0.104:3001/api/post/addpost");
+    var apiUrl= Uri.parse("http://172.16.185.203:3001/api/post/addpost");
 
     var response =await client.post(apiUrl,
         headers: <String,String>{
@@ -33,7 +33,7 @@ class PostApiService
 
   Future<List<Post>> getPost() async{
     var client= http.Client();
-    var apiUrl=Uri.parse("http://192.168.0.104:3001/api/post/viewall");
+    var apiUrl=Uri.parse("http://172.16.185.203:3001/api/post/viewall");
 
     var response= await client.get(apiUrl);
     if(response.statusCode==200)

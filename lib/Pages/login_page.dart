@@ -1,3 +1,4 @@
+import 'package:blog_app/Pages/menu.dart';
 import 'package:blog_app/Pages/post_menu.dart';
 import 'package:blog_app/Pages/register_page.dart';
 import 'package:blog_app/Pages/view_page.dart';
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
       SharedPreferences preferences=await SharedPreferences.getInstance();
       preferences.setString("userId", userId);
       print("successfully login");
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>PostMenu()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu()));
     }
     else if(response["status"]=="invalid email id")
     {
@@ -61,14 +62,15 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: email1,
                 decoration: InputDecoration(
-                    labelText: "Username",
-                    hintText: "Enter valid username",
+                    labelText: "Email id",
+                    hintText: "Enter valid email",
                     border: OutlineInputBorder()
                 ),
               ),
               SizedBox(height: 20,),
               TextField(
                 controller: pass1,
+                obscureText: true,
                 decoration: InputDecoration(
                     labelText: "Password",
                     hintText: "Enter password",
